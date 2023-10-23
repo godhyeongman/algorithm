@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "prettier": "3.0.3"
+  },
+  "name": "algorithm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/godhyeongman/algorithm.git",
+  "author": "dott <hyeongman24@gmail.com>",
+  "license": "MIT"
+}
