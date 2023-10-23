@@ -53,18 +53,15 @@ class SinglyLinkedList {
   shift() {
     if (this.head === null) return;
 
-    const head = this.head;
-    const currentHead = this.head.next;
+    const currentHead = this.head;
 
-    if (currentHead === null) {
-      this.head = null;
+    this.head = currentHead.next;
+    this.length--;
+
+    if (!currentHead.next) {
       this.tail = null;
-      this.length--;
-      return head;
     }
 
-    this.head = currentHead;
-    this.length--;
     return currentHead;
   }
 }
@@ -73,6 +70,3 @@ const list = new SinglyLinkedList();
 
 list.push(1);
 list.push(2);
-
-list.shift();
-list.shift();
