@@ -49,18 +49,30 @@ class SinglyLinkedList {
 
     return currentNode;
   }
+
+  shift() {
+    if (this.head === null) return;
+
+    const head = this.head;
+    const currentHead = this.head.next;
+
+    if (currentHead === null) {
+      this.head = null;
+      this.tail = null;
+      this.length--;
+      return head;
+    }
+
+    this.head = currentHead;
+    this.length--;
+    return currentHead;
+  }
 }
 
 const list = new SinglyLinkedList();
 
 list.push(1);
-console.log(list.length);
 list.push(2);
-console.log(list.head.next.value);
-list.push(3);
-console.log(list.head.next.next.value);
-console.log(list.length);
-console.log(list.tail.value);
-const popedNode = list.pop();
-console.log(popedNode.value);
-console.log(list.tail.value);
+
+list.shift();
+list.shift();
