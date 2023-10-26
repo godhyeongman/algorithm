@@ -79,9 +79,21 @@ class SinglyLinkedList {
 
     this.length++;
   }
+
+  get(value, curr) {
+    if (value >= this.length || value < 0) return null;
+
+    if (!curr) curr = this.head;
+
+    if (value === 0) return curr;
+
+    return this.get(value - 1, curr.next);
+  }
 }
 
 const list = new SinglyLinkedList();
-list.unShift(1);
-list.unShift(2);
-list.unShift(3);
+list.unShift('addMe');
+list.unShift(100);
+
+const a = list.get(0);
+console.log(a);
