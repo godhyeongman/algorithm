@@ -123,7 +123,7 @@ class SinglyLinkedList {
     if (index === 0) return this.shift();
 
     const targetPrev = this.get(index - 1);
-    const removedValue = targetPrev.next.value;
+    const removedValue = targetPrev.next;
     const targetNext = this.get(index + 1);
     targetPrev.next = targetNext;
 
@@ -131,16 +131,31 @@ class SinglyLinkedList {
 
     return removedValue;
   }
+
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+
+    // prev가 null인 이유? prev가 최초에 tail의 next로 사용되기때문
+    let prev = this.head.next;
+    let next;
+
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = prev;
+      prev = node;
+      node = next;
+    }
+
+    return this;
+  }
 }
 
 const list = new SinglyLinkedList();
-list.unShift(3);
-list.unShift(1);
+list.push(1);
+list.push(2);
+list.push(3);
+list.push(4);
 
-list.insert(1, 2);
-
-console.log(list.head.value);
-console.log(list.head.next.value);
-console.log(list.head.next.next.value);
-console.log(list.length);
-console.log(list.remove(1));
+list.reverse();
