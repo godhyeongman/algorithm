@@ -80,14 +80,22 @@ class SinglyLinkedList {
     this.length++;
   }
 
-  get(value, curr) {
-    if (value >= this.length || value < 0) return null;
+  get(index, curr = this.head) {
+    if (index >= this.length || index < 0) return null;
 
-    if (!curr) curr = this.head;
+    if (index === 0) return curr;
 
-    if (value === 0) return curr;
+    return this.get(index - 1, curr.next);
+  }
 
-    return this.get(value - 1, curr.next);
+  set(index, value) {
+    const target = this.get(index);
+
+    if (!target) return false;
+
+    target.value = value;
+
+    return true;
   }
 }
 
@@ -95,5 +103,5 @@ const list = new SinglyLinkedList();
 list.unShift('addMe');
 list.unShift(100);
 
-const a = list.get(0);
-console.log(a);
+list.set(2, 1);
+console.log(list.head.next.value);
