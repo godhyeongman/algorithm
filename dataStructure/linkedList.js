@@ -100,12 +100,7 @@ class SinglyLinkedList {
 
   insert(index, value) {
     if (index > this.length || index < 0) return false;
-
-    if (index === 0) {
-      this.unShift(value);
-      return true;
-    }
-
+    if (index === 0) return this.unShift(value);
     if (index === this.length) {
       this.push(value);
       return true;
