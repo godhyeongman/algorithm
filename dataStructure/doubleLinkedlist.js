@@ -29,12 +29,29 @@ class DoubleLinkedList {
 
     return this;
   }
+
+  pop() {
+    if (this.head === null) {
+      return;
+    }
+
+    const currentTail = this.tail;
+
+    if (this.head === this.tail) {
+      this.tail = null;
+      this.head = null;
+      return currentTail;
+    }
+
+    this.tail = this.tail.prev;
+    this.tail.next = null;
+    this.length--;
+
+    return currentTail;
+  }
 }
 
 const list = new DoubleLinkedList();
 
-list.push(1);
-list.push(2);
-
-console.log(list.head.next.value);
-console.log(list.tail.value);
+console.log(list.head);
+console.log(list.tail);
