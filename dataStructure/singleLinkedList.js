@@ -137,10 +137,6 @@ class SinglyLinkedList {
     this.head = this.tail;
     this.tail = node;
 
-<<<<<<< Updated upstream:dataStructure/linkedList.js
-    // prev가 null인 이유? prev가 최초에 tail의 next로 사용되기때문
-=======
->>>>>>> Stashed changes:dataStructure/singleLinkedList.js
     let prev = this.head.next;
     let next;
 
