@@ -19,6 +19,7 @@ class DoubleLinkedList {
     if (this.head === null) {
       this.head = node;
       this.tail = this.head;
+      this.length++;
       return this;
     }
 
@@ -96,12 +97,40 @@ class DoubleLinkedList {
 
     return this;
   }
+
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+
+    const isBiggerThanHalf = index > this.length / 2;
+
+    if (isBiggerThanHalf) {
+      let temp = this.tail;
+      for (let i = this.length - 2; i >= index; i--) {
+        temp = temp.prev;
+      }
+
+      return temp;
+    }
+
+    if (!isBiggerThanHalf) {
+      let temp = this.head;
+
+      for (let i = 1; i <= index; i++) {
+        temp = temp.next;
+      }
+
+      return temp;
+    }
+  }
 }
 
 const list = new DoubleLinkedList();
 
+list.push(1);
 list.push(2);
-list.unShift(1);
+list.unShift(0);
 
+console.log(list.length);
 console.log(list.head.value);
 console.log(list.tail.value);
+console.log(list.get(2).value);
