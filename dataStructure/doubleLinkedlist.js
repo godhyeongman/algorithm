@@ -77,13 +77,31 @@ class DoubleLinkedList {
     currentHead.next = null;
     return currentHead;
   }
+
+  unShift(value) {
+    const node = new Node(value);
+
+    if (this.head === null) {
+      this.head = node;
+      this.tail = this.head;
+      this.length++;
+      return this;
+    }
+
+    this.head.prev = node;
+    node.next = this.head;
+    this.head = node;
+
+    this.length++;
+
+    return this;
+  }
 }
 
 const list = new DoubleLinkedList();
 
-list.push(1);
+list.push(2);
+list.unShift(1);
 
-list.shift();
-
-console.log(list.head);
-console.log(list.tail);
+console.log(list.head.value);
+console.log(list.tail.value);
