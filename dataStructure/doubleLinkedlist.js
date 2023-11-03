@@ -156,10 +156,12 @@ class DoubleLinkedList {
     if (index < 0 || index >= this.length) return;
 
     const target = this.get(index - 1);
-    target.next = target.next;
+    target.prev.next = target.next;
     target.next.prev = target.prev;
+    target.next = null;
+    target.prev = null;
 
     this.length--;
-    return true;
+    return target;
   }
 }
