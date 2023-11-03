@@ -99,7 +99,7 @@ class DoubleLinkedList {
   }
 
   get(index) {
-    if (index < 0 || index >= this.length) return null;
+    if (index < 0 || index >= this.length || index == undefined) return null;
 
     const isBiggerThanHalf = index > this.length / 2;
 
@@ -131,6 +131,24 @@ class DoubleLinkedList {
 
     return true;
   }
+
+  insert(index, value) {
+    if (index === 0) return this.unShift(value);
+    if (index === this.length) return this.push(value);
+    if (index < 0 || index > this.length) return false;
+
+    const node = new Node(value);
+    const target = this.get(index);
+    const prev = target.prev;
+
+    prev.next = node;
+    target.prev = node;
+    node.prev = prev;
+    node.next = target;
+
+    this.length++;
+    return true;
+  }
 }
 
 const list = new DoubleLinkedList();
@@ -140,8 +158,9 @@ list.push(2);
 list.unShift(0);
 
 console.log(list.length);
+console.log(list.insert(3, 3));
+console.log(list.insert(0, -1));
 console.log(list.head.value);
 console.log(list.tail.value);
-console.log(list.get(2));
-console.log(list.set(3, 100));
-console.log(list.get(2).value);
+console.log(list.head.next.next.next.next.prev.prev.prev.value);
+console.log(list);
