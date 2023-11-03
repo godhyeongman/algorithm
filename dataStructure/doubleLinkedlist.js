@@ -149,6 +149,19 @@ class DoubleLinkedList {
     this.length++;
     return true;
   }
+
+  remove(index) {
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    if (index < 0 || index >= this.length) return;
+
+    const target = this.get(index - 1);
+    target.next = target.next;
+    target.next.prev = target.prev;
+
+    this.length--;
+    return true;
+  }
 }
 
 const list = new DoubleLinkedList();
@@ -159,8 +172,13 @@ list.unShift(0);
 
 console.log(list.length);
 console.log(list.insert(3, 3));
-console.log(list.insert(0, -1));
+console.log(list.insert(4, -1));
 console.log(list.head.value);
 console.log(list.tail.value);
-console.log(list.head.next.next.next.next.prev.prev.prev.value);
-console.log(list);
+console.log(list.length);
+console.log(list.remove(4));
+console.log(list.remove(2));
+console.log(list.remove(1));
+console.log(list.remove(0));
+console.log(list.remove(0));
+console.log(list.length);
