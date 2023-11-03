@@ -122,6 +122,15 @@ class DoubleLinkedList {
       return temp;
     }
   }
+
+  set(index, value) {
+    const target = this.get(index);
+    if (!target) return false;
+
+    target.value = value;
+
+    return true;
+  }
 }
 
 const list = new DoubleLinkedList();
@@ -133,4 +142,6 @@ list.unShift(0);
 console.log(list.length);
 console.log(list.head.value);
 console.log(list.tail.value);
+console.log(list.get(2));
+console.log(list.set(3, 100));
 console.log(list.get(2).value);
