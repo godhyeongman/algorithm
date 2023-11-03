@@ -163,22 +163,3 @@ class DoubleLinkedList {
     return true;
   }
 }
-
-const list = new DoubleLinkedList();
-
-list.push(1);
-list.push(2);
-list.unShift(0);
-
-console.log(list.length);
-console.log(list.insert(3, 3));
-console.log(list.insert(4, -1));
-console.log(list.head.value);
-console.log(list.tail.value);
-console.log(list.length);
-console.log(list.remove(4));
-console.log(list.remove(2));
-console.log(list.remove(1));
-console.log(list.remove(0));
-console.log(list.remove(0));
-console.log(list.length);
