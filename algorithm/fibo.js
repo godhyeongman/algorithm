@@ -8,6 +8,7 @@ function fibo(number) {
 console.log(fibo(5));
 
 // 수학적 지식이 없어서 내 생각대로 구현함, parameter가 2개나 더 있는게 아쉬움
+// 함수 관계도도 1렬로 이루어짐 이건 재귀적인 사고가 아니라 생각이듬
 function myFibo(number, current = 0, next = 1) {
   number = number - 1;
 
