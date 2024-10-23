@@ -24,6 +24,7 @@ class LinkedList {
 
     this.tail.next = new Node(value);
     this.tail = this.tail.next;
+    this.length++;
     return this;
   }
 
@@ -65,14 +66,81 @@ class LinkedList {
 
     return temp;
   }
+
+  unshift(value) {
+    const previousHead = this.head;
+    this.head = new Node(value);
+    this.head.next = previousHead;
+
+    if (this.length === 0) {
+      this.tail = this.head;
+    }
+
+    this.length++;
+  }
+
+  get(index) {
+    if (index < 0 || index > this.length) return null;
+    let temp = this.head;
+
+    while (!(index === 0)) {
+      temp = temp.next;
+      index--;
+    }
+
+    return temp;
+  }
+
+  set(index, value) {
+    const node = this.get(index);
+
+    if (!node) return null;
+
+    node.value = value;
+  }
+
+  insert(index, value) {
+    if (index < 0 || index > this.length) return null;
+
+    if (index === 0) {
+      this.unshift(value);
+      return;
+    }
+
+    if (index === this.length) {
+      this.push(value);
+      return;
+    }
+
+    let temp = this.head;
+
+    while (!(index === 1)) {
+      temp = temp.next;
+      index--;
+    }
+
+    const originalNode = temp.next;
+    const newNode = new Node(value);
+
+    temp.next = newNode;
+    newNode.next = originalNode;
+
+    this.length++;
+  }
+
+  re;
 }
 
 const lls = new LinkedList();
 
-lls.push(1).push(2).push(3);
+lls.push(1).push(2).push(3).unshift(0);
 // const popped = lls.pop();
-const shifited = lls.shift();
+// const set = lls.set(3, 'last');
 
-console.log(shifited.value, lls.head.value);
+lls.insert(0, -1);
+
+const last = lls.get(lls.length - 1);
+
+console.log(last.value, lls.head.value, lls.length);
 
 // console.log(lls.tail.value);
