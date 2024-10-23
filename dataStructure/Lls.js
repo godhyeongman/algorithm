@@ -128,19 +128,37 @@ class LinkedList {
     this.length++;
   }
 
-  re;
+  reverse() {
+    let targetIndex = this.length - 1;
+    const temp = [];
+
+    while (targetIndex >= 0) {
+      const node = this.get(targetIndex);
+      temp.push(node);
+
+      targetIndex--;
+    }
+    console.log(temp.length);
+
+    temp.forEach((el, idx) => {
+      el.next = temp[idx + 1];
+      if (idx === 0) el.next = null;
+    });
+
+    this.head = temp[0];
+    this.tail = temp[temp.length - 1];
+  }
 }
 
 const lls = new LinkedList();
 
-lls.push(1).push(2).push(3).unshift(0);
+lls.push(1);
 // const popped = lls.pop();
 // const set = lls.set(3, 'last');
 
-lls.insert(0, -1);
-
+// lls.insert(0, -1);
+//
+lls.reverse();
 const last = lls.get(lls.length - 1);
 
 console.log(last.value, lls.head.value, lls.length);
-
-// console.log(lls.tail.value);
