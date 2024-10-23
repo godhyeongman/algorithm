@@ -129,30 +129,24 @@ class LinkedList {
   }
 
   reverse() {
-    let targetIndex = this.length - 1;
-    const temp = [];
+    let node = this.head;
 
-    while (targetIndex >= 0) {
-      const node = this.get(targetIndex);
-      temp.push(node);
+    this.head = this.tail;
+    let next;
+    let previous = null;
 
-      targetIndex--;
+    for (let i = 0; i < this.length; i++) {
+      next = node.next;
+      node.next = previous;
+      previous = node;
+      node = next;
     }
-    console.log(temp.length);
-
-    temp.forEach((el, idx) => {
-      el.next = temp[idx + 1];
-      if (idx === 0) el.next = null;
-    });
-
-    this.head = temp[0];
-    this.tail = temp[temp.length - 1];
   }
 }
 
 const lls = new LinkedList();
 
-lls.push(1);
+lls.push(1).push(2).push(3);
 // const popped = lls.pop();
 // const set = lls.set(3, 'last');
 
