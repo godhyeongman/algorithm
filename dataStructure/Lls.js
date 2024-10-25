@@ -282,12 +282,63 @@ class DoubleLinkedList {
       return temp;
     }
   }
+
+  set(index, value) {
+    const node = this.get(index);
+
+    if (!node) return false;
+
+    node.value = value;
+
+    return true;
+  }
+
+  insert(index, value) {
+    if (index < 0 || index > this.length) return;
+
+    if (index === 0) {
+      this.unShift(value);
+      return;
+    }
+
+    if (index === this.length - 1) {
+      this.push(value);
+      return;
+    }
+
+    const target = this.get(index);
+    const node = new Node(value);
+
+    node.next = target.next;
+    target.next.prev = node;
+
+    node.prev = target;
+    target.next = node;
+
+    this.length++;
+  }
+
+  remove(index) {
+    if (index < 0 || index > this.length) return;
+
+    if (index === 0) return this.shift();
+
+    if (index === this.length - 1) return this.pop();
+
+    const target = this.get(index);
+
+    target.prev.next = target.next;
+    target.next.prev = target.prev;
+
+    this.length--;
+  }
 }
 
 const dls = new DoubleLinkedList();
 dls.push(1);
 dls.push(2);
 dls.push(3);
-console.log(dls.tail.value);
+dls.insert(2, 4);
+dls.remove(1);
 
-console.log(dls.get(2).value);
+console.log(dls.get().value);
