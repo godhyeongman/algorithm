@@ -156,3 +156,138 @@ lls.reverse();
 const last = lls.get(lls.length - 1);
 
 console.log(last.value, lls.head.value, lls.length);
+
+class DoubledNode {
+  constructor(props) {
+    this.next;
+    this.previos;
+    this.value;
+  }
+}
+
+class DoubleLinkedList {
+  constructor(props) {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+  push(value) {
+    const node = new Node(value);
+
+    if (this.length === 0) {
+      this.head = node;
+      this.tail = node;
+      this.length++;
+      return;
+    }
+
+    this.tail.next = node;
+    node.prev = this.tail;
+    this.tail = node;
+    this.length++;
+  }
+
+  pop() {
+    if (!this.head) return;
+    const tail = this.tail;
+
+    if (this.length === 1) {
+      this.head === null;
+      this.tail === null;
+      this.length--;
+
+      return tail;
+    }
+
+    const prev = this.tail.prev;
+
+    prev.next = null;
+    this.tail = prev;
+    this.length--;
+    tail.prev = null;
+
+    return tail;
+  }
+
+  shift() {
+    if (!this.head) return;
+
+    const head = this.head;
+
+    if (this.length === 1) {
+      this.head === null;
+      this.tail === null;
+      this.length--;
+
+      return head;
+    }
+
+    this.head = this.head.next;
+    this.head.prev = null;
+
+    head.next = null;
+    this.length--;
+
+    return head;
+  }
+
+  unShift(value) {
+    const node = new Node(value);
+    node.next = null;
+    node.prev = null;
+    if (!this.head) {
+      this.head = node;
+      this.tail = node;
+
+      this.length++;
+      return this;
+    }
+
+    this.head.prev = node;
+    node.next = this.head;
+    this.head = node;
+    this.length++;
+    return this;
+  }
+
+  get(index) {
+    if (index < 0 || index >= this.length) return;
+
+    const half = Math.floor(this.length / 2);
+
+    let temp;
+    let target;
+
+    if (half < index) {
+      temp = this.tail;
+      target = this.length - 1;
+
+      while (index !== target) {
+        target--;
+        temp = temp.prev;
+      }
+
+      return temp;
+    }
+
+    if (half >= index) {
+      temp = this.head;
+      target = 0;
+      while (index !== target) {
+        target++;
+        temp = temp.next;
+      }
+
+      return temp;
+    }
+  }
+}
+
+const dls = new DoubleLinkedList();
+dls.push(1);
+dls.push(2);
+dls.push(3);
+console.log(dls.tail.value);
+
+console.log(dls.get(2).value);
