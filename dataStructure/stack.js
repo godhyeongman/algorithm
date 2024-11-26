@@ -26,4 +26,23 @@ class Stack {
     newNode.next = this.first;
     this.first = newNode;
   }
+
+  pop() {
+    if (this.first === null) return;
+
+    const poppedNode = this.first;
+
+    if (this.first === this.last) {
+      this.first === null;
+      this.last === null;
+      this.size--;
+
+      return poppedNode;
+    }
+
+    this.first = this.first.next;
+    this.size--;
+
+    return poppedNode;
+  }
 }
