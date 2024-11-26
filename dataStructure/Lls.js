@@ -341,4 +341,4 @@ dls.push(3);
 dls.insert(2, 4);
 dls.remove(1);
 
-console.log(dls.get().value);
+console.log(dls.get(2).value);
