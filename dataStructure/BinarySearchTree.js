@@ -72,13 +72,36 @@ class BinarySearchTree {
 
     return null;
   }
+
+  dfs(target, node = this.root) {
+    if (node.value === target) return node;
+    console.log(node.value);
+    let value;
+
+    if (node.left) {
+      const res = this.dfs(target, node.left);
+      if (res) value = res;
+    }
+    if (node.right) {
+      const res = this.dfs(target, node.right);
+      if (res) value = res;
+    }
+
+    if (value) return value;
+
+    return null;
+  }
 }
 
 const bst = new BinarySearchTree();
 
 bst.insert(1);
-bst.insert(4);
+bst.insert(0.1);
 bst.insert(3);
 
+bst.insert(4);
+
 const result = bst.bfs(3);
+const test = bst.dfs(4);
 result;
+test;
