@@ -3,26 +3,6 @@ class Heap {
     this.values = [];
   }
 
-  // insert(value) {
-  //   this.values.push(value);
-  //
-  //   let lastIndex = this.values.length - 1;
-  //   let insertedIndex = Math.ceil((lastIndex - 1) / 2);
-  //
-  //   while (this.values[lastIndex] > this.values[insertedIndex]) {
-  //     if (insertedIndex < 0) break;
-  //
-  //     const parentValue = this.values[insertedIndex];
-  //
-  //     this.values[insertedIndex] = this.values[lastIndex];
-  //     this.values[lastIndex] = parentValue;
-  //
-  //     lastIndex = insertedIndex;
-  //     insertedIndex = Math.ceil((lastIndex - 1) / 2);
-  //   }
-  //
-  //   return this.values;
-  // }
   insert(value) {
     this.values.push(value);
     this.bubbleUp();
