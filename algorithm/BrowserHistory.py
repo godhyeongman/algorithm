@@ -1,3 +1,6 @@
+from hmac import new
+
+
 class Node:
 
     def __init__(self, value=None, next=None, prev=None):
@@ -8,71 +11,38 @@ class Node:
 
 class BrowserHistory:
     def __init__(self) -> None:
-        self.maxAt = None
-        self.insertAt = None
         self.head = None
         self.tail = None
 
     def visit(self, url) -> None:
         newNode = Node(url)
-        if self.head is None and self.tail is None:
+
+        if self.head is None:
             self.head = newNode
             self.tail = newNode
-            self.insertAt = 1
-            self.maxAt = 1
-            return
+            return self.tail.value
 
-        if self.maxAt == self.insertAt:
-            newNode.prev = self.tail
-            self.tail.next = newNode
-            self.tail = newNode
-            self.insertAt += 1
-            self.maxAt += 1
-            return
-
-        sholudStartTail = self.maxAt / 2 < self.insertAt
-
-        idx = 0
-        temp = None
-
-        if sholudStartTail:
-            temp = self.tail
-            while idx + self.insertAt != self.maxAt:
-                idx += 1
-                temp = temp.prev
-
-        else:
-            temp = self.head
-            while idx == self.insertAt:
-                idx += 1
-                temp = temp.next
-
-        newNode.prev = temp
-        temp.next = newNode
+        newNode.prev = self.tail
+        self.tail.next = newNode
         self.tail = newNode
-        self.maxAt = self.insertAt + 1
-        self.insertAt += 1
+        return self.tail.value
 
     def back(self, number):
-        diff = self.insertAt - number
+        temp = self.tail
 
-        if diff < 0:
-            self.insertAt = None
-            self.maxAt = None
-            self.head = None
-            self.tail = None
-            return
-
-        self.insertAt = diff
+        while number > 0 and temp.prev is not None:
+            number -= 1
+            temp = temp.prev
+        self.tail = temp
 
     def forward(self, number):
+        temp = self.tail
 
-        diff = self.insertAt + number
+        while number > 0 and temp.next is not None:
+            number -= 1
+            temp = temp.next
 
-        if diff >= self.maxAt:
-            self.insertAt = self.maxAt
-
-        self.insertAt = diff
+        self.tail = temp
 
 
 test = BrowserHistory()
@@ -81,8 +51,9 @@ test.visit("2")
 test.visit("3")
 test.visit("4")
 
-test.back(3)
+test.back(2)
 test.forward(1)
+
 test.visit("5")
 
-# print(test.head.next.next.next.value)
+print(test.tail.prev.value)
