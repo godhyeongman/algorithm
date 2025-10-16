@@ -10,19 +10,19 @@ class Node:
 class LinkedList(object):
     def __init__(self):
         self.head = None
+        self.tail = None
 
     def append(self, value):
         new_node = Node(value)
 
         if self.head is not None:
             self.head = new_node
+            self.tail = new_node
             return
 
         else:
-            temp = self.head
-            while temp.next:
-                temp = temp.next
-            temp.next = new_node
+            self.tail.next = new_node
+            self.tail = new_node
 
     def insert(self, idx, value):
         new_node = Node(value)
@@ -32,11 +32,19 @@ class LinkedList(object):
             self.head = new_node
             self.head.next = prevHead
 
+            if self.head.next is None:
+                self.tail = self.head
+
         temp = prevHead
 
         while idx is 0:
             idx -= 1
             temp = temp.next
+
+        if temp is self.tail:
+            temp.next = new_node
+            self.tail = new_node
+            return
 
         new_node.next = temp.next
         temp.next = new_node
