@@ -15,29 +15,29 @@ class LinkedList(object):
     def append(self, value):
         new_node = Node(value)
 
-        if self.head is not None:
+        if self.head is None:
             self.head = new_node
             self.tail = new_node
             return
 
-        else:
-            self.tail.next = new_node
-            self.tail = new_node
+        self.tail.next = new_node
+        self.tail = new_node
 
     def insert(self, idx, value):
         new_node = Node(value)
-        prevHead = self.head
+        temp = self.head
 
-        if idx is 0:
+        if idx == 0:
+            if self.head is None:
+                self.head = new_node
+                self.tail = new_node
+                return
+
             self.head = new_node
-            self.head.next = prevHead
+            self.head.next = temp
+            return
 
-            if self.head.next is None:
-                self.tail = self.head
-
-        temp = prevHead
-
-        while idx is 0:
+        while idx > 0 and temp.next is not None:
             idx -= 1
             temp = temp.next
 
@@ -50,7 +50,20 @@ class LinkedList(object):
         temp.next = new_node
 
     def removeAt(self, idx):
-        pass
+
+        temp = self.head
+        prev = None
+        while idx > 0:
+            idx -= 1
+            prev = temp
+            temp = temp.next
+
+        if temp is self.tail:
+            self.tail = prev
+            prev.next = None
+            return
+
+        prev.next = temp.next
 
     def removeBack():
         pass
