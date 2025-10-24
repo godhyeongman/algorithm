@@ -35,4 +35,4 @@ def validBracket(str):
     return True
 
 
-print(validBracket("[{}[{)(}]]"))
+print(validBracket("([)]"))
