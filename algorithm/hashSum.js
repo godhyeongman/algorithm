@@ -1,16 +1,15 @@
 const hashSum = (arr, target) => {
-  const tmp = new Set();
+  const setArr = new Set(arr);
 
-  for (let num of arr) {
+  for (let num of setArr) {
     const diff = target - num;
-    const hasDiff = tmp.has(diff);
+    const hasDiff = setArr.has(diff);
 
-    console.log(tmp, num, diff);
+    console.log(setArr, num, diff);
 
     if (hasDiff) return true;
-    tmp.add(num);
   }
   return false;
 };
 
-console.log(hashSum([1, 2, 3, 4, 5], 3));
+console.log(hashSum([3, 2, 3, 4, 5], 3));
