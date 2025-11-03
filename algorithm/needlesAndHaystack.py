@@ -1,20 +1,18 @@
 class Solution:
     def strStr(self, haystack: str, needle: str) -> int:
-        sLength = len(needle)
-        cnt = 0
+        if len(needle) > len(haystack):
+            return -1
 
-        for idx, char in enumerate(haystack):
-            if cnt == sLength:
-                return idx - (sLength)
+        if len(needle) == len(haystack):
+            if needle == haystack: return 0
+            else: return -1
 
-            if needle[cnt] == char :
-                cnt +=1
-                continue
+        for i in range(len(haystack) - len(needle)):
+            comb = haystack[i: i + len(needle)]
+            if comb == needle:
+                return i
 
-            cnt = 0
-
-        if cnt == sLength: return 0
         return -1
 
 
-print(Solution().strStr('sadbutsad', 'sad'))
+print(Solution().strStr('a', 'a'))
